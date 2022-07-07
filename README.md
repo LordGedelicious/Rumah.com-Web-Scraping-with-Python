@@ -8,15 +8,17 @@ Scraping information from Rumah.com with several filters and parsers using Pytho
 4. Number of bathrooms (Jumlah Kamar Mandi)
 5. Price per meter squared (Harga per meter persegi)
 6. Property Type (Tipe Properti)
-7. Property Area (Luas Properti)
+7. Property's Land Area (Luas Tanah Properti)
+8. Property's Building Area (Luas Bangunan Properti)
 8. Property's Interior (Interior Properti)
 9. Number of Floors (Jumlah Lantai)
 10. Parking Spaces (Jumlah Tempat Parkir)
 11. Property's Year of Construction (Tahun Konstruksi Properti)
 12. Property's Listing Date (Tanggal Listing Properti)
-13. Property's Latitude and Longitude (Latitude dan Longitude Properti)
-14. Property's Description (Deskripsi Properti)
-15. URL to Property's Page (URL Properti)
+13. Property's Latitude (Latitude Properti)
+14. Property's Longitude (Longitude Properti)
+15. Property's Developer (Pengembang Properti)
+16. URL to Property's Page (URL Properti)
 
 # The following is the filter for the property type and information. Only properties that match the filter will be scraped.
 1. Listed on the website in the last month
@@ -25,3 +27,11 @@ Scraping information from Rumah.com with several filters and parsers using Pytho
 - Kecamatan Cakung
 - Kecamatan Kelapa Gading
 - Kecamatan Cilincing
+
+# Notes about Output
+1. Format listing dan pembangunan dalam DATETIME
+2. Kalau N/A, ganti jadi NULL atau kosong
+3. Deskripsi buang headernya
+4. Interior ambil opsi yang lebih atas
+5. Harga per meter pakai angka aja
+6. Per kecamatan dipisah
