@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.edge.options import Options
 import undetected_chromedriver.v2 as uc
 import time
 import pandas as pd
@@ -31,13 +31,15 @@ def returnLatitudeLongitude(maps_link):
 
 
 def returnLinks(location_param, filename, max_page_limit):
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option('excludeSwitches', ['enable-logging'])
-    options.add_argument("--disable-dev-shm-usage")
+    # options = webdriver.ChromeOptions()
+    # options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    # options.add_argument("--disable-dev-shm-usage")
+    # options = Options()
+    # options.add_argument("--disable-dev-shm-usage")
     results = []
     total_links = 0
     current_file_count = 0
-    current_web_page_number = 1
+    current_web_page_number = 113
     isLinkValid = True
     while isLinkValid:
         local_total_links = 0
@@ -56,13 +58,19 @@ def returnLinks(location_param, filename, max_page_limit):
                     page_link = "https://www.rumah.com/properti-dijual/{}?freetext={}&listing_type=sale&listing_posted=31&property_type=B&property_type_code[]=BUNG&market=residential&search=true".format(
                         current_web_page_number, location_param)
                 randomSleepTime()
-                driver = webdriver.Chrome(service=Service(
-                    ChromeDriverManager().install()), options=options)
+                driver = webdriver.Edge(
+                    executable_path=r"C:\Users\Gede Prasidha\Downloads\edgedriver_win64\msedgedriver.exe")
+                # driver = webdriver.Chrome(service=Service(
+                #     ChromeDriverManager().install()), options=options) [ USE FOR INDIVIDUAL WEB SCRAPING ]
                 # driver = uc.Chrome(options=options, version_main=97)
                 driver.get(page_link)
-                randomSleepTime()
+                time.sleep(random.randint(7, 10))
+                time.sleep(random.randint(7, 10))
+                print("You should've completed the CAPTCHA by now, otherwise repeat from page {}".format(
+                    current_web_page_number))
                 page_links = driver.find_elements(
                     By.XPATH, "//a[@class='nav-link']")
+                randomSleepTime()
                 for i in page_links:
                     temp_link = i.get_attribute("href")
                     if temp_link not in results:
@@ -70,7 +78,8 @@ def returnLinks(location_param, filename, max_page_limit):
                         local_total_links += 1
                         total_links += 1
                         writer.writerow([temp_link])
-                print("Successfully added links from page {} for search {}".format(
-                    current_web_page_number, location_param))
+                print("Successfully added {} links from page {} for search {}".format(
+                    len(results), current_web_page_number, location_param))
                 current_web_page_number += 1
+                driver.close()
     print("{} links written in total.".format(total_links))

@@ -14,20 +14,20 @@ import random
 
 results = []
 
-page_num_limit_list = [140, 156, 40]
+page_num_limit_list = [140, 113, 15]
 districts = ["kelapa+gading", "cakung", "cilincing"]
 district_names = ["kelapa gading", "cakung", "cilincing"]
 
-returnLinks(districts[0], district_names[0], page_num_limit_list[0])
+# returnLinks(districts[0], district_names[0], page_num_limit_list[0])
 # random_time = random.randint(10, 20)
 # time.sleep(random_time)
-# try:
-#     returnLinks(districts[1], district_names[1], page_num_limit_list[1])
+# try
+returnLinks(districts[1], district_names[1], page_num_limit_list[1])
 # except:
 #     print("Error in {}\n\n".format(district_names[1]))
 # random_time = random.randint(10, 20)
 # time.sleep(random_time)
 # try:
-#     returnLinks(districts[2], district_names[2], page_num_limit_list[2])
+# returnLinks(districts[2], district_names[2], page_num_limit_list[2])
 # except:
 #     print("Error in {}\n\n".format(district_names[2]))
